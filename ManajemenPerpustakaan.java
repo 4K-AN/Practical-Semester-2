@@ -4,35 +4,49 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * Kelas KelompokBuku digunakan untuk mengelompokkan buku berdasarkan kategori tertentu.
+ */
 class KelompokBuku {
 
-    private String jenis;
-    public List<KoleksiBuku> inventaris;
-
+    private String jenis; // Menyimpan kategori atau jenis buku
+    public List<KoleksiBuku> inventaris; // List untuk menyimpan koleksi buku dalam kategori ini
+    /**
+     * Konstruktor untuk membuat kategori buku baru.
+     * param jenis Nama kategori buku.
+     */
     public KelompokBuku(String jenis) {
         this.jenis = jenis;
-        this.inventaris = new ArrayList<>();
+        this.inventaris = new ArrayList<>(); // Inisialisasi daftar koleksi buku
     }
-
+ /**
+     * Method untuk menambahkan buku ke dalam kategori.
+     * param buku Objek KoleksiBuku yang akan ditambahkan.
+     */
     public void tambah(KoleksiBuku buku) {
         if (!inventaris.contains(buku)) {
             inventaris.add(buku);
         }
     }
 
+    /**
+     * Method untuk mendapatkan jenis atau kategori buku.
+     * return String yang merepresentasikan kategori buku.
+     */
     public String getJenis() {
         return jenis;
     }
-
+  /**
+     * Method untuk menampilkan seluruh koleksi buku dalam kategori ini.
+     */
     public void tampilkanKoleksi() {
         System.out.println("\n════════════════════════════════");
-        System.out.println(" KATEGORI: " + jenis.toUpperCase());
+        System.out.println(" KATEGORI: " + jenis.toUpperCase()); // Menampilkan nama kategori dalam huruf kapital
         System.out.println("════════════════════════════════");
-
+     // Menampilkan setiap buku dalam daftar inventaris
         for (int i = 0; i < inventaris.size(); i++) {
-            System.out.println("[" + (i + 1) + "]");
-            inventaris.get(i).tampil();
+            System.out.println("[" + (i + 1) + "]"); // Menampilkan indeks buku dalam daftar
+            inventaris.get(i).tampil(); // Memanggil method tampil() dari KoleksiBuku
             System.out.println("-----------------------------------");
         }
     }
@@ -41,12 +55,19 @@ class KelompokBuku {
 public class ManajemenPerpustakaan {
 
     private static Scanner scanner = new Scanner(System.in);
-    private static KelompokBuku[] rak = new KelompokBuku[5]; // Misal ada 5 kategori buku
+    private static KelompokBuku[] rak = new KelompokBuku[6]; 
+    /*Scanner: Digunakan untuk input pengguna melalui konsol
+
+    rak: Array untuk menyimpan 6 kategori buku 
+    
+    Static: Variabel/Method bersifat class-level, bukan instance-level */
 
     public static void main(String[] args) {
         initializeLibrary();
+    // Inisialisasi rak perpustakaan dengan 6 kategori buku
+    
 
-        while (true) {
+        while (true) { // Menampilkan menu utama dan memproses pilihan pengguna
             System.out.println("\n═══════════════════════════════════");
             System.out.println("    SISTEM PERPUSTAKAAN DIGITAL");
             System.out.println("═══════════════════════════════════");
@@ -58,7 +79,7 @@ public class ManajemenPerpustakaan {
 
             int choice = getIntInput();
 
-            switch (choice) {
+            switch (choice) {  // Handling pilihan menu
                 case 1:
                     tampilkanSemuaBuku();
                     break;
@@ -73,13 +94,13 @@ public class ManajemenPerpustakaan {
                     bacaDataDariFile();
                     break;
                 default:
-                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+                    System.out.println("Pilihan tidak valid. Silakan coba lagi."); 
             }
         }
     }
 
     private static void bacaDataDariFile() {
-        System.out.println("Membaca data dari file...");
+        System.out.println("Membaca data dari file...");    // ... validasi
         KoleksiBuku buku = FileManager.bacaFile("data_buku.txt");
 
         if (buku != null) {
@@ -93,7 +114,7 @@ public class ManajemenPerpustakaan {
             if (rak[0] == null) {
                 rak[0] = new KelompokBuku("Teknologi");
             }
-            rak[0].tambah(buku);
+            rak[0].tambah(buku); // Tambah ke kategori pertama
 
             // Menyimpan kembali ke file lain
             FileManager.simpanFile("data_buku_output.txt", buku);
@@ -173,40 +194,43 @@ public class ManajemenPerpustakaan {
     }
 
     private static void tampilkanSemuaBuku() {
+        // Menampilkan seluruh koleksi buku dalam berbagai kategori 
         System.out.println("\n═══ DAFTAR KOLEKSI BUKU ═══");
+        //Loop melalui setiap kategori buku dalam array rak
         for (KelompokBuku kategori : rak) {
-            kategori.tampilkanKoleksi();
+            kategori.tampilkanKoleksi(); //// Memanggil metode untuk menampilkan buku dalam kategori tersebut
         }
     }
 
     private static void cekKesamaanBuku() {
+        //Metode untuk membandingkan tingkat kesamaan antara dua buku
         System.out.println("\n═══ CEK TINGKAT KESAMAAN BUKU ═══");
-
+        //Menampilkan kategori buku yang tersedia
         System.out.println("\nKategori Buku:");
         for (int i = 0; i < rak.length; i++) {
             System.out.println((i + 1) + ". " + rak[i].getJenis());
         }
-
+        //Memilih dua buku untuk dibandingkan
         KoleksiBuku buku1 = pilihBuku("Pilih buku pertama");
         if (buku1 == null) {
-            return;
+            return; // Jika buku tidak valid, keluar dari metode
         }
 
         KoleksiBuku buku2 = pilihBuku("Pilih buku kedua");
         if (buku2 == null) {
-            return;
+            return; // Jika buku tidak valid, keluar dari metode
         }
-
+        //Menampilkan informasi buku pertama
         System.out.println("\n════════════════════════════════");
         System.out.println(" INFORMASI BUKU PERTAMA");
         System.out.println("════════════════════════════════");
         buku1.tampil();
-
+        //Menampilkan informasi buku kedua
         System.out.println("\n════════════════════════════════");
         System.out.println(" INFORMASI BUKU KEDUA");
         System.out.println("════════════════════════════════");
         buku2.tampil();
-
+        //Melakukan perbandingan tingkat kesamaan antara dua buku
         System.out.println("\n════════════════════════════════");
         System.out.println(" HASIL PERBANDINGAN");
         System.out.println("════════════════════════════════");
@@ -214,49 +238,49 @@ public class ManajemenPerpustakaan {
         System.out.println("\nTingkat Kesamaan: " + String.format("%.2f%%", similarity));
     }
 
-    private static KoleksiBuku pilihBuku(String message) {
+    private static KoleksiBuku pilihBuku(String message) {//Metode untuk memilih buku dari kategori tertentu
         System.out.println("\n" + message + ":");
-
+        //Menampilkan daftar kategori yang tersedia
         System.out.println("Pilih kategori buku:");
         for (int i = 0; i < rak.length; i++) {
             System.out.println((i + 1) + ". " + rak[i].getJenis());
         }
-
+        //Meminta pengguna memilih kategori
         System.out.print("Pilih kategori (1-" + rak.length + "): ");
         int categoryChoice = getIntInput();
-
+        //Validasi input kategori
         if (categoryChoice < 1 || categoryChoice > rak.length) {
             System.out.println("Kategori tidak valid.");
-            return null;
+            return null; // Kembalikan nilai null jika input tidak valid
         }
 
-        KelompokBuku selectedCategory = rak[categoryChoice - 1];
-
+        KelompokBuku selectedCategory = rak[categoryChoice - 1]; //Ambil kategori berdasarkan input pengguna
+        //Periksa apakah kategori memiliki buku 
         if (selectedCategory.inventaris.isEmpty()) {
             System.out.println("Kategori " + selectedCategory.getJenis() + " tidak memiliki buku.");
             return null;
-        }
+        } //Menampilkan daftar buku dalam kategori yang dipilih
         System.out.println("\nPilih buku dari kategori " + selectedCategory.getJenis() + ":");
         for (int i = 0; i < selectedCategory.inventaris.size(); i++) {
             System.out.println((i + 1) + ". " + selectedCategory.inventaris.get(i).getNamaBuku());
         }
-
+        //Meminta pengguna memilih buku
         System.out.print("Pilih buku (1-" + selectedCategory.inventaris.size() + "): ");
         int bookChoice = getIntInput();
-
+        //Validasi input buku
         if (bookChoice < 1 || bookChoice > selectedCategory.inventaris.size()) {
             System.out.println("Pilihan buku tidak valid.");
-            return null;
+            return null; // Kembalikan nilai null jika input tidak valid
         }
 
-        return selectedCategory.inventaris.get(bookChoice - 1);
+        return selectedCategory.inventaris.get(bookChoice - 1); // Mengembalikan buku yang dipilih
     }
 
-    private static int getIntInput() {
+    private static int getIntInput() { // Metode untuk menangani input integer dengan validasi
         try {
-            return Integer.parseInt(scanner.nextLine());
+            return Integer.parseInt(scanner.nextLine()); // Mengubah input string menjadi integer
         } catch (NumberFormatException e) {
-            return -1;
+            return -1; // Jika terjadi kesalahan konversi, kembalikan nilai -1 sebagai indikator input tidak valid
         }
     }
 }
