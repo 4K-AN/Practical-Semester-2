@@ -74,8 +74,9 @@ public class ManajemenPerpustakaan {
             System.out.println("1. Tampilkan Semua Buku");
             System.out.println("2. Cek Tingkat Kesamaan Buku");
             System.out.println("3. Keluar");
-            System.out.println("4. Baca Data Buku dari File"); // Tambahkan menu ini
-            System.out.print("Pilih menu (1-4): ");
+            System.out.println("4. Baca Data Buku dari File"); 
+            System.out.println("5. Hitung Royalti Buku");
+            System.out.print("Pilih menu (1-5): ");
 
             int choice = getIntInput();
 
@@ -93,12 +94,46 @@ public class ManajemenPerpustakaan {
                 case 4:
                     bacaDataDariFile();
                     break;
+                case 5:
+                    hitungRoyaltiBuku();
+                    break;
                 default:
-                    System.out.println("Pilihan tidak valid. Silakan coba lagi."); 
+                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             }
         }
     }
+     // Method untuk menghitung royalti buku berdasarkan harga dan persentase royalti
+    private static void hitungRoyaltiBuku() {
+        System.out.print("Masukkan harga buku: Rp"); 
+        double hargaBuku = scanner.nextDouble(); // Input harga buku dari pengguna
+        
+        System.out.print("Masukkan persentase royalti (jika ingin default 10%, masukkan 0): ");
+        String inputRoyalti = scanner.next(); // Input persentase royalti dari pengguna
+        
+        if (inputRoyalti.endsWith("%")) {
+            inputRoyalti = inputRoyalti.substring(0, inputRoyalti.length() - 1);
+        }
+        
+        double persenRoyalti = Double.parseDouble(inputRoyalti);
 
+        double royalti;
+        if (persenRoyalti == 0) {
+            royalti = hitungRoyalti(hargaBuku); // Menggunakan nilai default 10%
+        } else {
+            royalti = hitungRoyalti(hargaBuku, persenRoyalti); // Menggunakan nilai yang dimasukkan
+        }
+
+        System.out.println("Royalti yang diterima: Rp" + royalti);
+    }
+       // Method untuk menghitung royalti dengan default 10%
+    private static double hitungRoyalti(double hargaBuku) {
+        return hargaBuku * 0.10; // 10% dari harga buku
+    }
+    // Method untuk menghitung royalti dengan persentase tertentu
+    private static double hitungRoyalti(double hargaBuku, double persenRoyalti) {
+        return hargaBuku * (persenRoyalti / 100); // Menghitung sesuai persentase yang diberikan
+    }
+  
     private static void bacaDataDariFile() {
         System.out.println("Membaca data dari file...");    // ... validasi
         KoleksiBuku buku = FileManager.bacaFile("data_buku.txt");
@@ -124,9 +159,7 @@ public class ManajemenPerpustakaan {
         }
     }
 
-
-
-    private static void initializeLibrary() {
+    private static void initializeLibrary() { //Fungsi ini memastikan bahwa sebelum sistem digunakan, kategori buku telah dibuat dan siap diisi dengan koleksi buku.
         rak = new KelompokBuku[7];
         rak[0] = new KelompokBuku("Teknologi");
         rak[1] = new KelompokBuku("Filsafat");
@@ -136,7 +169,8 @@ public class ManajemenPerpustakaan {
         rak[5] = new KelompokBuku("Politik");
         rak[6] = new KelompokBuku("Fiksi");
 
-        // Teknologi
+        // Tambahkan buku ke kategori pertama (misalnya kategori Teknologi, Filsafat, Sejarah, Agama, Psikologi, Politik, dan Fiksi)
+// Teknologi
         rak[0].tambah(new KoleksiBuku("ChatGPT Buatkan Saya Kode Ini",
                 Arrays.asList("Angilbert"), 2012, "ChatGPT Buatkan Saya Kode Ini adalah sebuah buku yang ditulis oleh Angilbert dan diterbitkan pada tahun 2012. Buku ini membahas bagaimana kecerdasan buatan dapat membantu programmer dalam menulis kode, memperbaiki kesalahan, dan meningkatkan efisiensi dalam pengembangan perangkat lunak."));
         rak[0].tambah(new KoleksiBuku("Jokowi Programming Pro",
