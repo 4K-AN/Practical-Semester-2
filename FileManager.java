@@ -10,7 +10,7 @@ public class FileManager {
             String namaBuku = reader.readLine(); // Membaca judul buku
             String pengarangStr = reader.readLine(); // Membaca nama pengarang dalam satu string
             String tahunStr = reader.readLine(); // Membaca tahun terbit dalam bentuk string
-            String sinopsis = reader.readLine(); // Membaca sinopsis buku
+            String sinopsis = reader.readLine(); // Membaca sinopsis buku.
     
             // Cek apakah ada baris yang null (file tidak lengkap)
             if (namaBuku == null || pengarangStr == null || tahunStr == null || sinopsis == null) {

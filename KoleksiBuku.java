@@ -7,7 +7,7 @@ public class KoleksiBuku {
     private int tahun; // Tahun terbit buku
     private String sinopsis; // Sinopsis buku
 
-    // Konstruktor untuk inisialisasi objek KoleksiBuku
+    // Konstruktor untuk inisialisasi objek KoleksiBuku.
     public KoleksiBuku(String namaBuku, List<String> pengarang, int tahun, String sinopsis) {
         this.namaBuku = namaBuku;
         this.pengarang = pengarang;

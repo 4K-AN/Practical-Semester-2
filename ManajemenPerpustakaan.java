@@ -108,8 +108,8 @@ public class ManajemenPerpustakaan {
         double hargaBuku = scanner.nextDouble(); // Input harga buku dari pengguna
         
         System.out.print("Masukkan persentase royalti (jika ingin default 10%, masukkan 0): ");
-        String inputRoyalti = scanner.next(); // Input persentase royalti dari pengguna
-        
+        String inputRoyalti = scanner.next(); // Input persentase royalti dari pengguna.
+
         if (inputRoyalti.endsWith("%")) {
             inputRoyalti = inputRoyalti.substring(0, inputRoyalti.length() - 1);
         }
