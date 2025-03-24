@@ -1,96 +1,9 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
-class KoleksiBuku {
-
-    private String namaBuku;
-    private List<String> pengarang;
-    private int tahun;
-    private String sinopsis;
-
-    public KoleksiBuku(String namaBuku, List<String> pengarang, int tahun, String sinopsis) {
-        this.namaBuku = namaBuku;
-        this.pengarang = new ArrayList<>(pengarang);
-        this.tahun = tahun;
-        this.sinopsis = sinopsis;
-    }
-
-    public String getNamaBuku() {
-        return namaBuku;
-    }
-
-    public int hitungJumlahKataSinopsis() {
-        return sinopsis.split("\\s+").length;
-    }
-
-    public double cekTingkatKesamaan(KoleksiBuku bukuLain) {
-        int totalAttributes = 4;
-        int sameCount = 0;
-
-        if (this.namaBuku.equalsIgnoreCase(bukuLain.namaBuku)) {
-            sameCount++;
-
-            System.out.println("- Judul buku sama");
-        } else {
-            System.out.println("- Judul buku berbeda");
-        }
-
-        if (new HashSet<>(this.pengarang).equals(new HashSet<>(bukuLain.pengarang))) {
-            sameCount++;
-            System.out.println("- Penulis sama");
-        } else {
-            System.out.println("- Penulis berbeda");
-        }
-        if (this.tahun == bukuLain.tahun) {
-            sameCount++;
-            System.out.println("- Tahun terbit sama");
-        } else {
-            System.out.println("- Tahun terbit berbeda");
-        }
-
-        if (this.sinopsis.equalsIgnoreCase(bukuLain.sinopsis)) {
-            sameCount++;
-            System.out.println("- Sinopsis sama");
-        } else {
-            System.out.println("- Sinopsis berbeda");
-        }
-
-        return (sameCount / (double) totalAttributes) * 100;
-    }
-
-    public KoleksiBuku copy() {
-        return new KoleksiBuku(
-                this.namaBuku,
-                new ArrayList<>(this.pengarang),
-                this.tahun,
-                this.sinopsis
-        );
-    }
-
-    public void tampil() {
-        System.out.println(" " + namaBuku);
-        System.out.print("   Penulis: ");
-        if (pengarang.size() > 1) {
-            System.out.print(pengarang.get(0));
-            for (int i = 1; i < pengarang.size(); i++) {
-                System.out.print(", " + pengarang.get(i));
-            }
-        } else {
-            System.out.print(pengarang.get(0));
-        }
-        System.out.println("\n   Tahun: " + formatTahun(tahun));
-        System.out.println("   Sinopsis: " + sinopsis);
-        System.out.println("   Jumlah Kata Sinopsis: " + hitungJumlahKataSinopsis());
-    }
-
-    private String formatTahun(int tahun) {
-        return tahun < 0 ? Math.abs(tahun) + " SM" : String.valueOf(tahun);
-    }
-}
 
 class KelompokBuku {
 
@@ -125,10 +38,10 @@ class KelompokBuku {
     }
 }
 
-class ManajemenPerpustakaan {
+public class ManajemenPerpustakaan {
 
     private static Scanner scanner = new Scanner(System.in);
-    private static KelompokBuku[] rak;
+    private static KelompokBuku[] rak = new KelompokBuku[5]; // Misal ada 5 kategori buku
 
     public static void main(String[] args) {
         initializeLibrary();
@@ -140,7 +53,8 @@ class ManajemenPerpustakaan {
             System.out.println("1. Tampilkan Semua Buku");
             System.out.println("2. Cek Tingkat Kesamaan Buku");
             System.out.println("3. Keluar");
-            System.out.print("Pilih menu (1-3): ");
+            System.out.println("4. Baca Data Buku dari File"); // Tambahkan menu ini
+            System.out.print("Pilih menu (1-4): ");
 
             int choice = getIntInput();
 
@@ -155,11 +69,41 @@ class ManajemenPerpustakaan {
                     System.out.println("Terima kasih telah menggunakan sistem perpustakaan digital!");
                     System.exit(0);
                     break;
+                case 4:
+                    bacaDataDariFile();
+                    break;
                 default:
                     System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             }
         }
     }
+
+    private static void bacaDataDariFile() {
+        System.out.println("Membaca data dari file...");
+        KoleksiBuku buku = FileManager.bacaFile("data_buku.txt");
+
+        if (buku != null) {
+            System.out.println("\n=== Data Buku yang Dibaca ===");
+            System.out.println("Judul: " + buku.getNamaBuku());
+            System.out.println("Penulis: " + String.join(", ", buku.getPengarang()));
+            System.out.println("Tahun Terbit: " + buku.getTahun());
+            System.out.println("Sinopsis: " + buku.getSinopsis());
+
+            // Menambahkan buku ke kategori pertama (misalnya kategori Teknologi)
+            if (rak[0] == null) {
+                rak[0] = new KelompokBuku("Teknologi");
+            }
+            rak[0].tambah(buku);
+
+            // Menyimpan kembali ke file lain
+            FileManager.simpanFile("data_buku_output.txt", buku);
+            System.out.println("Buku telah disimpan kembali ke data_buku_output.txt.");
+        } else {
+            System.out.println("Gagal membaca file.");
+        }
+    }
+
+
 
     private static void initializeLibrary() {
         rak = new KelompokBuku[7];
