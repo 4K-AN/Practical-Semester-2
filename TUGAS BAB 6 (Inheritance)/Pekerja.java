@@ -1,14 +1,10 @@
 // Pekerja.java
-import java.text.DecimalFormat;       // Import untuk menggunakan kelas LocalDate
-import java.time.LocalDate;          // Import untuk menghitung periode waktu
-import java.time.Period;   // Import untuk memformat angka desimal
-
 // Kelas Pekerja sebagai turunan dari kelas Manusia
 public class Pekerja extends Manusia {
     // Deklarasi atribut private
-    private double gaji;          // Gaji dasar pekerja
-    private LocalDate tahunMasuk; // Tanggal mulai bekerja
-    private int jumlahAnak;       // Jumlah anak
+    private double gaji;                     // Gaji dasar pekerja
+    private java.time.LocalDate tahunMasuk;  // Tanggal mulai bekerja
+    private int jumlahAnak;                  // Jumlah anak
     
     /* 
      * Constructor kelas Pekerja
@@ -16,7 +12,7 @@ public class Pekerja extends Manusia {
      * gaji, tahun masuk kerja, dan jumlah anak
      */
     public Pekerja(String nama, String nik, boolean jenisKelamin, boolean menikah, 
-                   double gaji, LocalDate tahunMasuk, int jumlahAnak) {
+                   double gaji, java.time.LocalDate tahunMasuk, int jumlahAnak) {
         super(nama, nik, jenisKelamin, menikah);  // Memanggil constructor kelas induk
         this.gaji = gaji;                         // Inisialisasi gaji
         this.tahunMasuk = tahunMasuk;             // Inisialisasi tahun masuk
@@ -34,12 +30,12 @@ public class Pekerja extends Manusia {
     }
     
     // Getter untuk mendapatkan tahun masuk
-    public LocalDate getTahunMasuk() {
+    public java.time.LocalDate getTahunMasuk() {
         return tahunMasuk;
     }
     
     // Setter untuk mengubah tahun masuk
-    public void setTahunMasuk(LocalDate tahunMasuk) {
+    public void setTahunMasuk(java.time.LocalDate tahunMasuk) {
         this.tahunMasuk = tahunMasuk;
     }
     
@@ -59,7 +55,7 @@ public class Pekerja extends Manusia {
      * antara tahun masuk dengan waktu sekarang
      */
     public int getLamaBekerja() {
-        return Period.between(tahunMasuk, LocalDate.now()).getYears();
+        return java.time.Period.between(tahunMasuk, java.time.LocalDate.now()).getYears();
     }
     
     /*
@@ -107,7 +103,7 @@ public class Pekerja extends Manusia {
      */
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#.0");
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");
         return super.toString() + "\nTahun Masuk: " + tahunMasuk + 
                "\nJumlah Anak: " + jumlahAnak + "\nGaji: $" + df.format(gaji);
     }

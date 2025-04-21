@@ -1,92 +1,89 @@
-// Import library untuk formatting angka
-import java.text.DecimalFormat;
-
-// Kelas MahasiswaFILKOM mewarisi dari kelas Manusia
+/*
+ * Kelas MahasiswaFILKOM yang mewarisi dari Manusia
+ * Mengimplementasikan sistem beasiswa dan status mahasiswa
+ */
 public class MahasiswaFILKOM extends Manusia {
-    // Variabel instance private
-    private String nim;    // Menyimpan NIM mahasiswa
-    private double ipk;    // Menyimpan IPK mahasiswa
-    
-    // Konstruktor untuk inisialisasi objek MahasiswaFILKOM
-    public MahasiswaFILKOM(String nama, String nik, boolean jenisKelamin, boolean menikah, String nim, double ipk) {
-        super(nama, nik, jenisKelamin, menikah);  // Memanggil konstruktor parent class
+    private String nim;    // NIM mahasiswa format: 225150700111023
+    private double ipk;    // IPK dalam skala 4.0
+
+    // Konstruktor dengan parameter lengkap
+    public MahasiswaFILKOM(String nama, String nik, boolean jenisKelamin, 
+                          boolean menikah, String nim, double ipk) {
+        super(nama, nik, jenisKelamin, menikah);  // Memanggil konstruktor parent
         this.nim = nim;
         this.ipk = ipk;
     }
-    
-    // Getter dan Setter untuk NIM
+
+    // Getter dan setter untuk NIM
     public String getNim() {
         return nim;
     }
-    
+
     public void setNim(String nim) {
         this.nim = nim;
     }
-    
-    // Getter dan Setter untuk IPK
+
+    // Getter dan setter untuk IPK
     public double getIpk() {
         return ipk;
     }
-    
+
     public void setIpk(double ipk) {
         this.ipk = ipk;
     }
-    
-    // Method untuk mendapatkan status prodi dan angkatan
+
+    /*
+     * Method untuk menentukan status prodi dan angkatan
+     * Menggunakan logika substring dan switch case
+     */
     public String getStatus() {
-        String angkatan = "20" + nim.substring(0, 2);  // Ekstrak tahun angkatan dari NIM
-        char kodeProdi = nim.charAt(6);  // Ambil karakter ke-7 untuk kode prodi
-        
-        String prodi;
-        // Switch case untuk menentukan nama prodi berdasarkan kode
-        switch (kodeProdi) {
-            case '2':
-                prodi = "Teknik Informatika";
-                break;
-            case '3':
-                prodi = "Teknik Komputer";
-                break;
-            case '4':
-                prodi = "Sistem Informasi";
-                break;
-            case '6':
-                prodi = "Pendidikan Teknologi Informasi";
-                break;
-            case '7':
-                prodi = "Teknologi Informasi";
-                break;
-            default:
-                prodi = "Unknown";  // Default jika kode tidak dikenali
-        }
-        
-        return prodi + ", " + angkatan;  // Format output: Prodi, Tahun Angkatan
+        String angkatan = "20" + nim.substring(0, 2);  // Ekstrak tahun angkatan
+        char kodeProdi = nim.charAt(6);  // Ambil kode prodi dari NIM
+
+        // Switch case untuk konversi kode prodi ke nama jurusan
+        String prodi = switch (kodeProdi) {
+            case '2' -> "Teknik Informatika";
+            case '3' -> "Teknik Komputer";
+            case '4' -> "Sistem Informasi";
+            case '6' -> "Pendidikan Teknologi Informasi";
+            case '7' -> "Teknologi Informasi";
+            default -> "Unknown";
+        };
+
+        return prodi + ", " + angkatan;
     }
-    
-    // Method untuk menghitung besaran beasiswa berdasarkan IPK
+
+    /*
+     * Method untuk menghitung beasiswa berdasarkan IPK
+     * Menggunakan range IPK dengan batasan tertentu
+     */
     public double getBeasiswa() {
-        if (ipk >= 3.0 && ipk < 3.5) {
-            return 50;  // Beasiswa 50 untuk IPK 3.0-3.49
-        } else if (ipk >= 3.5 && ipk <= 4.0) {
-            return 75;  // Beasiswa 75 untuk IPK 3.5-4.0
-        } else {
-            return 0;   // Tidak dapat beasiswa jika IPK < 3.0
-        }
+        if (ipk >= 3.0 && ipk < 3.5) return 50;
+        else if (ipk >= 3.5 && ipk <= 4.0) return 75;
+        return 0;
     }
-    
-    // Override method getPendapatan dari parent class
+
+    /*
+     * Override method pendapatan dari parent class
+     * Menambahkan beasiswa ke total pendapatan
+     */
     @Override
     public double getPendapatan() {
-        // Total pendapatan = pendapatan manusia + beasiswa
         return super.getPendapatan() + getBeasiswa();
     }
-    
-    // Override method toString untuk representasi string objek
+
+    /*
+     * Override method toString untuk menampilkan data lengkap
+     * Menggunakan java.text.DecimalFormat secara langsung tanpa import
+     */
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#.0");  // Format IPK 1 desimal
+        // Menggunakan fully qualified name untuk DecimalFormat
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");
         return super.toString() + 
-               "\nNIM: " + nim +          // Menampilkan NIM
-               "\nIPK: " + df.format(ipk) +  // Menampilkan IPK diformat
-               "\nStatus: " + getStatus();  // Menampilkan status prodi & angkatan
+               "\nNIM: " + nim +
+               "\nIPK: " + df.format(ipk) +  // Format IPK 1 desimal
+               "\nStatus: " + getStatus();
     }
 }
+

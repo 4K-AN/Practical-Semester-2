@@ -1,50 +1,56 @@
-// Import library yang diperlukan
-import java.text.DecimalFormat;    // Untuk menangani tanggal masuk
-import java.time.LocalDate; // Untuk formatting angka
-
-// Kelas Manager mewarisi dari Pekerja
+/*
+ * Kelas Manager yang mewarisi sifat dari kelas Pekerja.
+ * Mengimplementasikan konsep inheritance dan method overriding.
+ */
 public class Manager extends Pekerja {
-    // Variabel instance private
     private String departemen; // Menyimpan nama departemen yang dikelola
-    
-    // Konstruktor untuk inisialisasi objek Manager
+
+    /*
+     * Konstruktor untuk inisialisasi objek Manager
+     * @param tahunMasuk menggunakan tipe data java.time.LocalDate (full qualified name)
+     * untuk menghindari import statement
+     */
     public Manager(String nama, String nik, boolean jenisKelamin, boolean menikah, 
-                  double gaji, LocalDate tahunMasuk, int jumlahAnak, String departemen) {
-        super(nama, nik, jenisKelamin, menikah, gaji, tahunMasuk, jumlahAnak); // Memanggil konstruktor parent class
+                  double gaji, java.time.LocalDate tahunMasuk, int jumlahAnak, String departemen) {
+        super(nama, nik, jenisKelamin, menikah, gaji, tahunMasuk, jumlahAnak); // Memanggil konstruktor parent
         this.departemen = departemen;
     }
-    
-    // Getter untuk departemen
+
+    // Getter untuk mengakses nilai departemen
     public String getDepartemen() {
         return departemen;
     }
-    
-    // Setter untuk departemen
+
+    // Setter untuk mengubah nilai departemen
     public void setDepartemen(String departemen) {
         this.departemen = departemen;
     }
-    
-    // Override method tunjangan untuk menambahkan bonus manager
+
+    /*
+     * Override method tunjangan dari parent class
+     * Menambahkan bonus manager sebesar 10% dari gaji ke tunjangan dasar pekerja
+     */
     @Override
     public double getTunjangan() {
-        // Tunjangan manager = tunjangan pekerja biasa + 10% dari gaji
-        return super.getTunjangan() + (0.1 * getGaji());
+        return super.getTunjangan() + (0.1 * getGaji()); // Tunjangan dasar + 10% gaji
     }
-    
-    // Override method toString untuk representasi string objek
+
+    /*
+     * Override method toString untuk representasi string objek
+     * Menggunakan java.text.DecimalFormat secara langsung tanpa import
+     */
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#.0"); // Format untuk angka
-        return super.toString() + // Memanggil toString() dari parent class
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.0"); // Format angka
+        return super.toString() + // Memanggil toString() parent class
                "\nDepartemen: " + departemen; // Menambahkan info departemen
     }
 }
 
-/* PENJELASAN TAMBAHAN:
-1. Inheritance: Manager mewarisi semua fitur dari kelas Pekerja
-2. Komposisi Tanggal: Menggunakan LocalDate untuk menyimpan tahun masuk secara presisi (tahun-bulan-tanggal)
-3. Polimorfisme: Override method getTunjangan() dan toString() untuk menyesuaikan dengan kebutuhan kelas anak
-4. Bonus Manager: Tambahan 10% dari gaji sebagai tunjangan khusus manager
-5. Encapsulation: Variabel departemen diakses melalui getter/setter
-6. Code Reuse: Memanfaatkan method dari parent class (super.getTunjangan() dan super.toString())
+/* KONSEP OOP YANG DIGUNAKAN:
+1. Inheritance - Manager mewarisi Pekerja menggunakan 'extends'
+2. Encapsulation - Variabel departemen diproteksi dan diakses via getter/setter
+3. Polymorphism - Override method getTunjangan() dan toString()
+4. Code Reusability - Memanfaatkan method superclass dengan super.getTunjangan() dan super.toString()
+5. Tanpa Import Statement - Menggunakan full package path untuk LocalDate dan DecimalFormat
 */

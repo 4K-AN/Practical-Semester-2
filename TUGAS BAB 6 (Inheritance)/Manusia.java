@@ -1,6 +1,3 @@
-// Import library untuk formatting angka
-import java.text.DecimalFormat;
-
 // Kelas dasar yang merepresentasikan manusia
 public class Manusia {
     // Deklarasi variabel instance
@@ -75,7 +72,7 @@ public class Manusia {
     public String toString() {
         // Konversi boolean jenis kelamin ke string
         String jk = jenisKelamin ? "Laki-laki" : "Perempuan";
-        DecimalFormat df = new DecimalFormat("#.0");  // Format 1 desimal
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");  // Format 1 desimal
         
         return "Nama: " + nama + 
                "\nNIK: " + nik + 
