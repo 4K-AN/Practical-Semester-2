@@ -246,6 +246,7 @@ public class FormDaftarUlang extends JFrame {
         if (cmbJurusan.getSelectedIndex() == 0 || cmbJurusan.getSelectedItem().equals("-- Pilih Fakultas Dahulu --")) {
             errorMessage.append("- Program Studi\n"); valid = false;
         }
+        
         if (txtNamaOrtu.getText().trim().isEmpty()) { errorMessage.append("- Nama Orang Tua/Wali\n"); valid = false; }
         if (txtNoHPOrtu.getText().trim().isEmpty()) { errorMessage.append("- Nomor HP Orang Tua/Wali\n"); valid = false; }
         else if (!txtNoHPOrtu.getText().trim().matches("\\d{10,13}")) { 

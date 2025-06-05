@@ -1,3 +1,5 @@
+//ControlPanel.java
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -20,7 +22,7 @@ public class ControlsPanel extends JPanel {
         panelPernyataan.add(cbPernyataan);
 
         // Panel Tombol
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Changed to CENTER
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
         buttonPanel.setBackground(UIConstants.BACKGROUND_COLOR);
         //buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT); // For FlowLayout, alignmentX has less effect
                                                             // Centering is handled by FlowLayout.CENTER
