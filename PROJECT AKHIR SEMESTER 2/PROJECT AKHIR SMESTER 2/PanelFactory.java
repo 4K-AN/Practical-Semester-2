@@ -6,11 +6,7 @@ import javax.swing.*;
 
 public class PanelFactory {
 
-    /**
-     * Creates a standard section panel with a title and separator.
-     * @param title The title of the section.
-     * @return A JPanel configured as a section panel.
-     */
+   
     public static JPanel createSectionPanel(String title) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -41,12 +37,7 @@ public class PanelFactory {
         return panel;
     }
 
-    /**
-     * Creates a field panel with a label and a placeholder for a component.
-     * The component itself should be added to the returned panel by the caller.
-     * @param labelText The text for the label.
-     * @return A JPanel configured for a form field.
-     */
+  
     public static JPanel createFieldPanel(String labelText) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5)); // Reduced vertical gap
         panel.setBackground(UIConstants.BACKGROUND_COLOR);
@@ -61,26 +52,22 @@ public class PanelFactory {
         panel.add(lblField);
         return panel;
     }
-     /**
-     * Creates a field panel specifically for JTextArea to better align the label.
-     * @param labelText The text for the label.
-     * @return A JPanel configured for a form field with a JTextArea.
-     */
+   
     public static JPanel createTextAreaFieldPanel(String labelText) {
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS)); // Align label and text area horizontally
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setBackground(UIConstants.BACKGROUND_COLOR);
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100)); // Allow more height for text area
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100)); 
 
         JLabel lblField = new JLabel(labelText);
         lblField.setFont(UIConstants.LABEL_FONT);
         lblField.setPreferredSize(new Dimension(150, 20));
-        lblField.setAlignmentY(Component.TOP_ALIGNMENT); // Align label to the top of the text area
+        lblField.setAlignmentY(Component.TOP_ALIGNMENT); 
 
-        // Add some spacing between label and text area
+
         panel.add(lblField);
-        panel.add(Box.createRigidArea(new Dimension(0,0))); // Horizontal spacing is managed by FlowLayout in createFieldPanel. For BoxLayout, you might need this.
+        panel.add(Box.createRigidArea(new Dimension(0,0))); 
 
         return panel;
     }

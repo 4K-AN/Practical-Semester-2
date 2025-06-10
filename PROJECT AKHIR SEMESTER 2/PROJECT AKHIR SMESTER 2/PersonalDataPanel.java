@@ -9,9 +9,9 @@ public class PersonalDataPanel extends JPanel {
     public PersonalDataPanel(JTextField txtNama, JTextField txtNIM, JComboBox<String> cmbJenisKelamin,
                              JTextField txtTempatLahir, JComboBox<Integer> cmbTanggal, JComboBox<String> cmbBulan,
                              JComboBox<Integer> cmbTahun, JTextArea txtAlamat, JTextField txtEmail, JTextField txtNoHP) {
-        super(); // Call JPanel constructor
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Set layout for this panel itself
-        setBackground(UIConstants.BACKGROUND_COLOR); // Set background for this panel
+        super(); 
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); 
+        setBackground(UIConstants.BACKGROUND_COLOR); 
 
         // Nama Lengkap
         JPanel panelNama = PanelFactory.createFieldPanel("Nama Lengkap *");
@@ -42,12 +42,11 @@ public class PersonalDataPanel extends JPanel {
         txtAlamat.setLineWrap(true);
         txtAlamat.setWrapStyleWord(true);
         JScrollPane scrollAlamat = new JScrollPane(txtAlamat);
-        scrollAlamat.setPreferredSize(new Dimension(200, 60)); // Give scroll pane a preferred size
-        // Add the scroll pane directly to the field panel, ensuring label and component are in FlowLayout
+        scrollAlamat.setPreferredSize(new Dimension(200, 60));
         JPanel alamatContentPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0,0));
         alamatContentPanel.setBackground(UIConstants.BACKGROUND_COLOR);
         alamatContentPanel.add(scrollAlamat);
-        panelAlamat.add(alamatContentPanel); // Add the content (scroll pane) to the panel that has the label
+        panelAlamat.add(alamatContentPanel); 
         add(panelAlamat);
 
 

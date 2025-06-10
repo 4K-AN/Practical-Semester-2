@@ -24,8 +24,7 @@ public class ControlsPanel extends JPanel {
         // Panel Tombol
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
         buttonPanel.setBackground(UIConstants.BACKGROUND_COLOR);
-        //buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT); // For FlowLayout, alignmentX has less effect
-                                                            // Centering is handled by FlowLayout.CENTER
+      
 
 
         btnSubmit.setFont(UIConstants.BUTTON_FONT);
@@ -35,9 +34,9 @@ public class ControlsPanel extends JPanel {
         btnSubmit.addActionListener(submitListener);
 
         btnReset.setFont(UIConstants.BUTTON_FONT);
-        btnReset.setBackground(UIConstants.BACKGROUND_COLOR); // Or a light gray
+        btnReset.setBackground(UIConstants.BACKGROUND_COLOR); 
         btnReset.setForeground(UIConstants.PRIMARY_COLOR);
-        btnReset.setBorder(BorderFactory.createLineBorder(UIConstants.PRIMARY_COLOR)); // Add a border
+        btnReset.setBorder(BorderFactory.createLineBorder(UIConstants.PRIMARY_COLOR)); 
         btnReset.setFocusPainted(false);
         btnReset.addActionListener(resetListener);
 

@@ -69,7 +69,7 @@ public class SummaryWindow extends JFrame {
         btnPrint.setBackground(UIConstants.PRIMARY_COLOR);
         btnPrint.setForeground(UIConstants.TEXT_COLOR_ON_PRIMARY);
         btnPrint.setFocusPainted(false);
-        //btnPrint.setAlignmentX(Component.LEFT_ALIGNMENT); // Alignment for button in FlowLayout panel
+        
 
         btnPrint.addActionListener(e ->
                 JOptionPane.showMessageDialog(SummaryWindow.this,
@@ -77,15 +77,15 @@ public class SummaryWindow extends JFrame {
                         "Informasi", JOptionPane.INFORMATION_MESSAGE)
         );
         
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align button to the right
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnPanel.setBackground(UIConstants.BACKGROUND_COLOR);
         btnPanel.add(btnPrint);
-        btnPanel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align the panel itself to the left
+        btnPanel.setAlignmentX(Component.LEFT_ALIGNMENT); 
 
         mainSummaryPanel.add(btnPanel);
 
         JScrollPane scrollPane = new JScrollPane(mainSummaryPanel);
-        scrollPane.setBorder(null); // Remove scroll pane border
+        scrollPane.setBorder(null); 
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane);
 

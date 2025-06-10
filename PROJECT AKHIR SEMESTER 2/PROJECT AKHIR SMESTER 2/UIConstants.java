@@ -28,6 +28,5 @@ public class UIConstants {
     public static final Color SUCCESS_MESSAGE_TEXT_COLOR = new Color(46, 125, 50);
 
 
-    // Dimensions (optional, can be added as needed)
-    // public static final Dimension TEXT_FIELD_SIZE = new Dimension(200, 25);
+    
 }

@@ -14,7 +14,7 @@ public class AcademicDataPanel extends JPanel {
 
         // Fakultas
         JPanel panelFakultas = PanelFactory.createFieldPanel("Fakultas *");
-        cmbFakultas.addActionListener(fakultasListener); // Listener is passed from FormDaftarUlang
+        cmbFakultas.addActionListener(fakultasListener); 
         panelFakultas.add(cmbFakultas);
         add(panelFakultas);
 

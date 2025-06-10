@@ -84,13 +84,13 @@ public class FormDaftarUlang extends JFrame {
         // Input teks
         txtNama = new JTextField(20);
         txtNIM = new JTextField(20);
-        txtTempatLahir = new JTextField(10); // Adjusted size
+        txtTempatLahir = new JTextField(10); 
         txtEmail = new JTextField(20);
         txtNoHP = new JTextField(20);
         txtNamaOrtu = new JTextField(20);
         txtNoHPOrtu = new JTextField(20);
 
-        txtAlamat = new JTextArea(3, 20); // Rows, Columns
+        txtAlamat = new JTextArea(3, 20); 
 
         // Dropdown Jenis Kelamin
         String[] jenisKelaminOptions = {"-- Pilih --", "Laki-laki", "Perempuan"};
@@ -101,7 +101,7 @@ public class FormDaftarUlang extends JFrame {
         tanggalOptions[0] = null; // Atau representasi "--Pilih--" jika diperlukan validasi khusus
         for (int i = 1; i <= 31; i++) tanggalOptions[i] = i;
         cmbTanggal = new JComboBox<>(tanggalOptions);
-        // Set a custom renderer to display "--Pilih--" for null
+      
         cmbTanggal.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -203,7 +203,7 @@ public class FormDaftarUlang extends JFrame {
         txtNoHPOrtu.setText("");
 
         cmbJenisKelamin.setSelectedIndex(0);
-        cmbFakultas.setSelectedIndex(0); // This will trigger updateJurusan
+        cmbFakultas.setSelectedIndex(0); 
         cmbTanggal.setSelectedIndex(0);
         cmbBulan.setSelectedIndex(0);
         cmbTahun.setSelectedIndex(0);
